@@ -1,4 +1,4 @@
-app.controller('LoginController', ['$scope', '$http','$location','$rootScope', function($scope, $http,$location,$rootScope) {
+app.controller('LoginController', ['$scope','$location','Users', function($scope,$location,Users) {
   $scope.user_name = "";
   $scope.goToChat = function(p){
     if($scope.loginForm.userName.$valid == false){
@@ -6,7 +6,7 @@ app.controller('LoginController', ['$scope', '$http','$location','$rootScope', f
       $scope.loginForm.userName.$dirty = true;
       return;
     }
-    $rootScope.user_name = $scope.user_name;
+    Users.logInUser($scope.user_name);
     $location.path(p);
   }
 }]);

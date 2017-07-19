@@ -1,28 +1,32 @@
 // $(document).ready(function() {
 //   alert('hello');
 // });
-var app = angular.module("myChat",["ngRoute"]);
-app.config(function($routeProvider){
+var app = angular.module("myChat", ["ngRoute", "RoomService", "UserService"]);
+app.config(function($routeProvider) {
   $routeProvider.
-  when('/login',{
-    templateUrl: "login.html",
+  when('/login', {
+    templateUrl: "login/login.html",
     controller: "LoginController"
   }).
-  when('/chat',{
-    templateUrl: "chat.html",
+  when('/chat', {
+    templateUrl: "chat/chat.html",
     controller: "ChatController"
   }).
   otherwise({
     redirectTo: "/login"
   });
-  app.factory('items', function() {
-    var items = {};
-    var itemsService = {};
 
-    itemsService.list = function() {
-        return items;
-    };
-
-    return itemsService;
 });
+
+app.directive('myEnter', function() {
+  return function(scope, element, attrs) {
+    element.bind("keydown keypress", function(event) {
+      if (event.which === 13) {
+        scope.$apply(function() {
+          scope.$eval(attrs.myEnter);
+        });
+        event.preventDefault();
+      }
+    });
+  };
 });

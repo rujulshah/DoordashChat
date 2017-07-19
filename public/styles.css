@@ -58,17 +58,17 @@
 }
 .chat-header{
 	position: relative;
-	background-color: lightgrey;
+	background-color: white;
 	padding: 2px;
 }
 .chat-footer{
 	position: relative;
-	background-color: lightgrey;
+	background-color: white;
 	padding:5px;
 }
 .chat-body{
 	position: relative;
-	background-color: grey;
+	background-color: lightgrey;
 	padding:5px;
 	overflow: auto;
 	height:75vh;
@@ -79,13 +79,18 @@
 	clear: right;
 	background-color: white;
 	width:50%;
-	padding: 2px;
+	padding: 10px;
+	margin-bottom: 5px;
+	margin-left: 5px;
 }
 .chat-received-name{
 	clear: right;
 	padding-top: 2px;
 	padding-bottom: 5px;
 	padding-left: 2px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	color: grey;
 }
 .chat-sent{
 	border-radius:5px;
@@ -94,7 +99,9 @@
 	clear: both;
 	background-color: red;
 	width:50%;
-	padding: 2px;
+	padding: 10px;
+	margin-right: 10px;
+	color: white
 }
 .chat-sent-name{
 	float:right;
@@ -102,6 +109,8 @@
 	padding-top: 2px;
 	padding-bottom: 5px;
 	padding-right: 2px;
+	margin-bottom: 5px;
+	color: lightgrey;
 }
 .chat-input{
 	border-radius: 2px;
@@ -118,4 +127,10 @@
 	width:9%;
 	border:none;
 	background-color: white;
+}
+.current-user{
+	color: red;
+}
+.other-user{
+	color: grey;
 }

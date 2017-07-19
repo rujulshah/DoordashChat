@@ -1,39 +1,28 @@
-app.controller('ChatRoomController', ['$scope', '$http', '$location', '$rootScope', function($scope, $http, $location, $rootScope) {
-  $scope.$on('load-chat', function(event, args) {
-    $scope.isRoomClicked = true;
-    $scope.user_logged_in = $rootScope.user_name;
-    $scope.room_data = $rootScope.room_info;
-    $scope.room_data.users_online = $rootScope.user_name;
-    $.each($scope.room_data.users,function(index,value){
-      $scope.room_data.users_online = $scope.room_data.users_online +', ' + value;
-    });
-    var req_get = {
-      method: "GET",
-      url: "http://localhost:8080/api/rooms/"+$scope.room_data.id+"/messages"
-    }
-    $http(req_get).then(function success(response) {
-      $scope.messages = response.data;
-    }, function error(response) {
-      alert('An error occured please try again later');
-    });
-
+app.controller('ChatRoomController', ['$scope', 'Rooms','Users', '$anchorScroll', '$location', function($scope, Rooms, Users, $anchorScroll,$location) {
+    $scope.Rooms = Rooms;
+    $scope.Users = Users;
+    $scope.count = 0;
+    
     $scope.saveChat = function(){
+      $scope.count += 1;
       var data = {
-        name: $scope.user_logged_in,
-        message: $scope.user_message
+        name: Users.logged_in_user,
+        message: $scope.user_message,
+        id: "id_" + ($scope.count)
       };
-      var req = {
-        method: "POST",
-        url: "http://localhost:8080/api/rooms/"+$scope.room_data.id+"/messages",
-        data: data
-      }
-      $http(req).then(function success(response) {
-        $scope.messages.push(data);
+      Rooms.addMessageInRoom(data).success(function(message){
+        Rooms.selected_room_messages.push(data);
         $scope.user_message = "";
-      }, function error(response) {
-        alert('An error occured please try again later');
+        goToLastMessage(data.id);
+      }).error(function(error){
+        alert("Could not save message! err:" + JSON.stringify(error));
+        $scope.user_message = "";
       });
     }
-  });
+
+    function goToLastMessage(id){
+      $location.hash(id);
+      $anchorScroll();
+    }
 
 }]);

@@ -1,5 +1,6 @@
-app.controller('UserInfoController', ['$scope', '$http', '$location', '$rootScope', function($scope, $http, $location, $rootScope) {
-  $scope.user_info = {};
-  $scope.user_info.name = $rootScope.user_name;
-
+app.controller('UserInfoController', ['$scope', 'Users', function($scope, Users) {
+  $scope.Users = Users;
+  $scope.$on('$destroy',function(){
+    Users.logOutUser();
+  });
 }]);

@@ -1,6 +1,7 @@
-app.controller('ChatController', ['$scope', '$http','$location','$rootScope', function($scope,$http,$location,$rootScope) {
-  if($rootScope.user_name == undefined || $rootScope.user_name == "" || $rootScope.user_name == null){
+app.controller('ChatController', ['$scope','$location','Users', function($scope,$location,Users) {
+  $scope.Users = Users;
+  if(Users.logged_in_user == undefined || Users.logged_in_user == "" || Users.logged_in_user == null){
     //if not logged in redirect
-    //$location.path('/login');
+    $location.path('/login');
   }
 }]);

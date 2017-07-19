@@ -1,26 +1,21 @@
-app.controller('SideBarController', ['$scope', '$http', '$location', '$rootScope', function($scope, $http, $location, $rootScope) {
-  var req_get = {
-    method: "GET",
-    url: "http://localhost:8080/api/rooms"
-  }
-  $http(req_get).then(function success(response) {
-    $scope.navbar = response.data;
-  }, function error(response) {
-    alert('An error occured please try again later');
-  });
+app.controller('SideBarController', ['$scope','Rooms','Users', function($scope, Rooms, Users) {
+  $scope.Rooms = Rooms;
+  $scope.status;
+  $scope.room_list;
+  getRoomList();
 
-  $scope.getRoomDetails = function(room_id){
-    var req = {
-      method: "GET",
-      url: "http://localhost:8080/api/rooms/"+room_id
-    }
-    $http(req).then(function success(response) {
-      $rootScope.room_info = response.data;
-      $rootScope.$broadcast('load-chat');
-    }, function error(response) {
-      alert('An error occured please try again later');
-    });
-
+  function getRoomList() {
+      Rooms.getRoomList().success(function(room_list) {
+          $scope.room_list = room_list;
+      }).error(function(error) {
+          $scope.status = "Could not retrieve chat room list err:" + error;
+      })
   }
+
+
+  $scope.updateChatRoom = function(room_id){
+    Rooms.updateRoomSelection(Users.logged_in_user,room_id);
+    
+  };
 
 }]);

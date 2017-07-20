@@ -1,3 +1,11 @@
+# Running the project
+* In order to run the project run `npm-start` and `npm run api-server`. Browse to localhost:3000.
+* I haven't committed the node_modules folder. Please install all the dependencies by running `npm install`.
+* Will add documentation by tomorrow evening. Sorry could not complete documentation on time.
+
+
+
+
 # DoorDash Frontend Interview Project
 * TLDR: *Build a chat app with real APIs*
 * Time: *3hr - 6hrs*

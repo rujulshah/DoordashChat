@@ -1,6 +1,5 @@
-// $(document).ready(function() {
-//   alert('hello');
-// });
+//// Main App module definition.
+// This handles the routing to the two pages(login & chat) of the app. 
 var app = angular.module("myChat", ["ngRoute", "RoomService", "UserService"]);
 app.config(function($routeProvider) {
   $routeProvider.
@@ -18,6 +17,7 @@ app.config(function($routeProvider) {
 
 });
 
+// Directive(myEnter) for enter key
 app.directive('myEnter', function() {
   return function(scope, element, attrs) {
     element.bind("keydown keypress", function(event) {
